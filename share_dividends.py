@@ -1,6 +1,7 @@
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
+import bs4
 import warnings
 import concurrent.futures
 
@@ -15,10 +16,13 @@ class ShareDividends:
     """
 
     def parse(self, ticker: str or list, multi_thread = False, nthreads = 2):
-        """[summary]
+        """Primary method to orchestrate collection of dividend data
         
         Args:
-            ticker (str or list): [description]
+            ticker (str or list): The ticker symbol or symbols to collect
+
+        Returns:
+            pandas.core.frame.DataFrame: Final Pandas dataframe containing all the dividend data
         """
 
         # Handle single ticker provided
@@ -62,13 +66,13 @@ class ShareDividends:
   
 
     def get_dividend_data(self, ticker: str) -> pd.core.frame.DataFrame:
-        """[summary]
+        """Orchestrator that runs to the steps to scrape the dividend data for a given stock
         
         Args:
             ticker (str): ASX ticker symbol
         
         Returns:
-            pandas.core.frame.DataFrame: [description]
+            pandas.core.frame.DataFrame: Pandas dataframe containing the dividend data
         """
 
         # 1. Make site searchable using beautiful soup
@@ -86,11 +90,14 @@ class ShareDividends:
         return results
 
 
-    def get_ticker_page(self, ticker: str):
+    def get_ticker_page(self, ticker: str) -> bs4.BeautifulSoup:
         """Downloads the raw dividend page data for the ticker provided
         
         Args:
             ticker (str): ASX ticker symbol
+
+        Returns:
+            bs4.BeautifulSoup: Deserialised page as beautiful soup object
         """
 
         base_url = "http://www.sharedividends.com.au/"
