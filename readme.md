@@ -1,4 +1,4 @@
-# Share Dividend Scraper
+# Australian Share Dividend Scraper
 
 Python utility to scrape ASX listed share dividends from http://www.sharedividends.com.au 
 
