@@ -26,5 +26,5 @@ dividends = ShareDividends()
 dividends.parse(banks)
 
 # or with multi-threading
-dividends.parse(banks, multi_threading=True, nthreads=4)
+dividends.parse(banks, multi_thread=True, nthreads=4)
 ```
